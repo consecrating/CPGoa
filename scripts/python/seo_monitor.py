@@ -10,21 +10,14 @@ Requirements: pip install requests beautifulsoup4
 import requests
 import json
 import re
-import base64
 from datetime import datetime
 from typing import Dict, List, Tuple
 
-# Configuration
-WP_URL = "https://www.cpofficial.in"
-WP_USER = "sanctifygoa"
-WP_APP_PASSWORD = "BwVg tpE8 dHG4 82Tn 0AXz CWU9"
+from wp_config import WP_URL
 
-credentials = f"{WP_USER}:{WP_APP_PASSWORD}"
-token = base64.b64encode(credentials.encode()).decode()
-HEADERS = {
-    "Authorization": f"Basic {token}",
-    "Content-Type": "application/json"
-}
+# NOTE: This monitor only performs public GET requests, so credentials are not
+# required. HEADERS is kept for any authenticated checks you may add later.
+HEADERS = {"Content-Type": "application/json"}
 
 # Key pages to monitor
 KEY_PAGES = [

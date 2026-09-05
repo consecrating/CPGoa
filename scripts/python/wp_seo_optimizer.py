@@ -8,21 +8,13 @@ Requirements: pip install requests
 
 import requests
 import json
-import base64
 from typing import Optional, Dict, Any
 
-# Configuration
-WP_URL = "https://www.cpofficial.in"
-WP_USER = "sanctifygoa"
-WP_APP_PASSWORD = "BwVg tpE8 dHG4 82Tn 0AXz CWU9"
+from wp_config import WP_URL, auth_headers
 
-# Auth header
-credentials = f"{WP_USER}:{WP_APP_PASSWORD}"
-token = base64.b64encode(credentials.encode()).decode()
-HEADERS = {
-    "Authorization": f"Basic {token}",
-    "Content-Type": "application/json"
-}
+# Auth headers are built from environment/.env credentials. This raises a clear
+# error if credentials are missing, since this script writes to WordPress.
+HEADERS = auth_headers()
 
 # =============================================================================
 # SEO META DATA FOR KEY PAGES
