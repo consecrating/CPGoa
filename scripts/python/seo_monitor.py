@@ -10,21 +10,13 @@ Requirements: pip install requests beautifulsoup4
 import requests
 import json
 import re
-import base64
 from datetime import datetime
 from typing import Dict, List, Tuple
 
-# Configuration
-WP_URL = "https://www.cpofficial.in"
-WP_USER = "sanctifygoa"
-WP_APP_PASSWORD = "BwVg tpE8 dHG4 82Tn 0AXz CWU9"
+from wp_config import WP_URL  # public GETs only; no credentials needed
+HEADERS = {"Content-Type": "application/json"}
 
-credentials = f"{WP_USER}:{WP_APP_PASSWORD}"
-token = base64.b64encode(credentials.encode()).decode()
-HEADERS = {
-    "Authorization": f"Basic {token}",
-    "Content-Type": "application/json"
-}
+# Configuration (WP_URL + HEADERS defined above from wp_config; audit is read-only)
 
 # Key pages to monitor
 KEY_PAGES = [
@@ -38,6 +30,7 @@ KEY_PAGES = [
     "/best-floating-casino-in-goa/",
     "/blog/",
     "/best-casino-in-india/",
+    "/about-us/",
 ]
 
 # Target keywords to check in titles/meta
