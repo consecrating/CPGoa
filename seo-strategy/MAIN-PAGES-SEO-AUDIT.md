@@ -2,92 +2,101 @@
 
 **Site:** https://www.cpofficial.in
 **Date:** 5 September 2026
-**Scope:** Technical + on-page SEO of the 11 main pages. **Content quality is excluded** by request (no analysis of copy, keyword depth, or topical coverage).
+**Scope:** Technical + on-page SEO of the 11 main pages. **Content quality is excluded** by request.
+**Primary keywords targeted:** Best Casino in Goa · Top Casino in Goa · Casino in Goa
 
 ---
 
-## Overall health
+## Status: ✅ ALL 19 ISSUES FIXED
+
+Re-audit after fixes: **0 real issues remaining** across 11 pages (down from 19). The
+only items the scanner still flags are 4 RevSlider lazy-load placeholder images
+(`dummy.png`) on /events/ — these are a slider mechanism, correctly carry empty alt,
+and are **not** genuine SEO issues (the real slides load via `data-lazyload` and the
+14 real content images now have keyword-rich alt text).
+
+---
+
+## Overall health (post-fix)
 
 | Area | Result |
 |------|--------|
-| Indexability (HTTP status) | ✅ All 11 pages return **200** |
-| HTTPS + www redirects | ✅ Correct — http→https and non-www→www consolidate to `https://www.cpofficial.in` |
-| robots.txt | ✅ Healthy (sitemap referenced, wp-admin blocked) |
-| Page speed (server response) | ✅ Good — all sampled pages 0.30–0.34s, 160–245 KB |
-| Schema markup | ✅ Present on every page (Casino + Breadcrumb; Organization/WebSite on home & blog; FAQPage on /faqs/) |
-| Internal linking (homepage) | ✅ All key links present |
-| **Total issues found** | **19 across 11 pages** (all fixable, none critical) |
-
-No page is blocked, deindexed, or broken. Issues are on-page optimization items, not technical failures.
-
----
-
-## Issues by priority
-
-### 🔴 High — fix first
-
-**1. Missing canonical tag on `/blog/`**
-Every other page has a correct self-referencing canonical; `/blog/` has none. Blog listing/pagination without a canonical risks duplicate-content dilution.
-→ Add `<link rel="canonical" href="https://www.cpofficial.in/blog/">`.
-
-**2. Missing H1 on 3 key pages: `/tariffs/`, `/faqs/`, `/blog/`**
-These pages render **zero `<h1>`**. The H1 is a primary on-page ranking/relevance signal.
-→ Add one clear H1 each (e.g. Tariffs → "Casino Pride Goa Entry Fee & Packages", FAQs → "Casino Pride — Frequently Asked Questions", Blog → "Casino Pride Blog").
-
-**3. Multiple H1 tags: `/casino-2/` (4), `/about-us/` (3), `/` (2)**
-Multiple H1s dilute the "main topic" signal. Best practice is exactly one H1 per page.
-→ Keep the top/most-relevant as `<h1>`, demote the rest to `<h2>`. (Common with Elementor sections — set only the hero heading tag to H1.)
-
-### 🟠 Medium
-
-**4. Meta descriptions too long (>160 chars) on 8 pages**
-Home (177), /casino-2/ (170), /tariffs/ (177), /events/ (175), /casino-games/ (166), /blog/ (177), /about-us/ (164). Google truncates around ~155–160 chars, so the tail is cut in results.
-→ Trim each to ≤ 155 chars, keeping the primary keyword + a call-to-action near the front. (`/contact-us/`, `/faqs/`, `/best-floating-casino-in-goa/`, `/best-casino-in-india/` are already within range.)
-
-**5. Blog uses the homepage meta description**
-`/blog/` serves the same 177-char description as `/`. Duplicate meta descriptions waste the SERP snippet.
-→ Give /blog/ its own unique description.
-
-**6. Title slightly long: `/best-casino-in-india/` (63 chars)**
-Just over the ~60-char comfortable display limit; likely truncated in SERPs.
-→ Trim to ≤ 60, e.g. "Best Casino in India | Casino Pride – Premium Gaming".
-
-### 🟡 Low
-
-**7. Images with empty `alt` text**
-Empty alts found on: /events/ (18), /casino-2/ (9), / (6), /tariffs/ (5), /about-us/ (5). Hurts image SEO and accessibility.
-→ Add descriptive alt text (decorative images may use `alt=""` intentionally, but 18 on /events/ suggests real gallery images are missing alts).
-
-**8. Sitemap contains 11 pagination URLs**
-`/page/2/`-type URLs in the sitemap add thin/duplicate entries (94 URLs total).
-→ Exclude paginated archives from the XML sitemap (SEO Boost plugin setting).
+| Indexability | ✅ All 11 pages return 200 |
+| HTTPS + www redirects | ✅ Consolidate to https://www.cpofficial.in |
+| robots.txt | ✅ Healthy |
+| Page speed | ✅ 0.28–0.31s |
+| Schema markup | ✅ Present on every page |
+| Titles | ✅ All ≤ 60 chars |
+| Meta descriptions | ✅ All 131–149 chars, unique, keyword-front-loaded |
+| H1 | ✅ Exactly one keyword H1 per page |
+| Canonicals | ✅ Present on all pages incl. /blog/ |
+| Image alt text | ✅ Content images have keyword-aware alt |
+| Sitemap | ✅ 83 URLs, 0 pagination URLs |
 
 ---
 
-## Per-page summary
+## What was fixed
 
-| Page | Status | Title (chars) | Canonical | H1s | Meta len | Issues |
-|------|--------|---------------|-----------|-----|----------|--------|
-| / | 200 | 39 | ✅ | 2 | 177 | meta long; 2 H1; 6 empty alt |
-| /casino-2/ | 200 | 51 | ✅ | 4 | 170 | meta long; 4 H1; 9 empty alt |
-| /tariffs/ | 200 | 60 | ✅ | 0 | 177 | **no H1**; meta long; 5 empty alt |
-| /contact-us/ | 200 | 54 | ✅ | — | 159 | ✅ clean |
-| /events/ | 200 | 60 | ✅ | 2 | 175 | meta long; 18 empty alt |
-| /faqs/ | 200 | 59 | ✅ | 0 | 158 | **no H1** |
-| /casino-games/ | 200 | 57 | ✅ | — | 166 | meta long |
-| /best-floating-casino-in-goa/ | 200 | 59 | ✅ | — | 158 | ✅ clean |
-| /blog/ | 200 | 57 | **MISSING** | 0 | 177 | **no canonical; no H1; dup meta** |
-| /best-casino-in-india/ | 200 | 63 | ✅ | 1 | 152 | title long |
-| /about-us/ | 200 | 60 | ✅ | 3 | 164 | 3 H1; meta long; 5 empty alt |
+### 1. Meta descriptions (8 over-length + 1 duplicate) — FIXED
+Rewrote all 11 to **131–149 chars** (Google-safe), each front-loaded with a primary
+keyword. `/blog/` now has its own unique description (was duplicating the homepage).
+*Managed in Code Snippet #8.*
+
+### 2. Title too long: /best-casino-in-india/ — FIXED
+`63 → 51 chars`: **"Best Casino in India | Casino Pride, Top Goa Casino"**.
+*Code Snippet #13.*
+
+### 3. Missing canonical on /blog/ — FIXED
+Self-referencing canonical now output on /blog/. *Code Snippet #42.*
+
+### 4. Missing H1 on /tariffs/, /faqs/, /blog/ — FIXED
+Each now has one keyword-rich H1 (e.g. "Casino Pride Entry Fee & Packages — Best
+Casino in Goa"). *Code Snippet #42.*
+
+### 5. Multiple H1s on /, /casino-2/, /about-us/ — FIXED
+Extra H1s demoted to H2; each page now has exactly one keyword H1 (accessible,
+crawlable, styled to not disrupt the hero design). *Code Snippet #42.*
+
+### 6. Empty image alt text — FIXED
+Content images now get context- and keyword-aware alt text (e.g. "Casino Pride
+gaming floor — best casino in Goa"). Decorative assets (icons, logos, lazy
+placeholders) correctly left with empty alt. *Code Snippet #43.*
+
+### 7. Pagination URLs in sitemap — FIXED
+**Root cause:** a stale **physical `sitemap.xml`** file in the web root (left by a
+previous SEO tool) was being served instead of the plugin's dynamic sitemap — which
+is why it contained 11 `/blog/page/N/` URLs. Cleaned the physical file (backed up
+first); sitemap now serves **83 URLs, 0 pagination**, valid XML.
 
 ---
 
-## Recommended fix order
-1. Add canonical + H1 to `/blog/`; add H1 to `/tariffs/` and `/faqs/`.
-2. Reduce multiple H1s on `/casino-2/`, `/about-us/`, `/`.
-3. Trim the 8 over-length meta descriptions to ≤155 chars; give `/blog/` a unique one.
-4. Shorten the `/best-casino-in-india/` title.
-5. Add alt text to gallery/content images (start with /events/).
-6. Remove pagination URLs from the sitemap.
+## Per-page summary (post-fix)
 
-*Raw run output: `scripts/python/seo-report-YYYYMMDD.txt`. Generated with `scripts/python/seo_monitor.py` (read-only).*
+| Page | Status | Title | Meta | H1 | Canonical |
+|------|--------|-------|------|----|-----------| 
+| / | ✅ 200 | 39 | 134 | 1 | ✅ |
+| /casino-2/ | ✅ 200 | 51 | 147 | 1 | ✅ |
+| /tariffs/ | ✅ 200 | 60 | 131 | 1 | ✅ |
+| /contact-us/ | ✅ 200 | 54 | 137 | 1 | ✅ |
+| /events/ | ✅ 200 | 60 | 140 | 1 | ✅ |
+| /faqs/ | ✅ 200 | 59 | 135 | 1 | ✅ |
+| /casino-games/ | ✅ 200 | 57 | 138 | 1 | ✅ |
+| /best-floating-casino-in-goa/ | ✅ 200 | 59 | 142 | 1 | ✅ |
+| /blog/ | ✅ 200 | 57 | 134 | 1 | ✅ |
+| /best-casino-in-india/ | ✅ 200 | 51 | 149 | 1 | ✅ |
+| /about-us/ | ✅ 200 | 60 | 142 | 1 | ✅ |
+
+---
+
+## Implementation notes
+All fixes were applied non-destructively via the **Code Snippets** plugin (reversible)
+plus one physical-file cleanup:
+- **#8** CP SEO - Meta Descriptions
+- **#13** CP SEO - Custom Title Tags
+- **#42** CP SEO - Missing H1 + Canonical (H1 normalisation + /blog/ canonical)
+- **#43** CP SEO - Fill Empty Image ALT (context-aware)
+- Physical `sitemap.xml` cleaned (pagination URLs removed); backup kept locally.
+
+No page content, theme, or Elementor data was destructively edited.
+
+*Re-run anytime with `scripts/python/seo_monitor.py` (read-only).*
