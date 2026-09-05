@@ -6,21 +6,12 @@ Injects corrected schema markup via WordPress Code Snippets or direct injection.
 This script creates a PHP code snippet that adds proper JSON-LD schema to the site.
 """
 
-import requests
 import json
-import base64
 
-# Configuration
-WP_URL = "https://www.cpofficial.in"
-WP_USER = "sanctifygoa"
-WP_APP_PASSWORD = "BwVg tpE8 dHG4 82Tn 0AXz CWU9"
-
-credentials = f"{WP_USER}:{WP_APP_PASSWORD}"
-token = base64.b64encode(credentials.encode()).decode()
-HEADERS = {
-    "Authorization": f"Basic {token}",
-    "Content-Type": "application/json"
-}
+# This script only generates local PHP files; it does not call the WordPress
+# API, so no credentials are needed. If you add API calls later, use:
+#   from wp_config import WP_URL, auth_headers
+#   HEADERS = auth_headers()
 
 
 # =============================================================================

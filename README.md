@@ -50,10 +50,23 @@ CPGoa/
 
 ## How to Use the Scripts
 
-### Run SEO Monitor
+### First-time setup (credentials)
+Credentials are **never** hardcoded. They load from environment variables or a
+local, gitignored `.env` file:
+
 ```bash
 cd scripts/python
 pip install -r requirements.txt
+cp .env.example .env      # then edit .env with your WP application password
+```
+
+Generate an application password in **WP Admin → Users → Profile → Application Passwords**.
+`seo_monitor.py` only reads public pages (no credentials needed); `wp_seo_optimizer.py`
+requires credentials because it writes to the site.
+
+### Run SEO Monitor
+```bash
+cd scripts/python
 python seo_monitor.py
 ```
 
