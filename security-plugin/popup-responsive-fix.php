@@ -14,6 +14,33 @@
  * Deactivate this snippet to fully revert. No page content is modified.
  */
 
+/*
+ * Part A — Calendar mobile CSS for the EMBEDDED animation page.
+ * Page 27675 is built with Elementor, so edits to the classic content field are
+ * not rendered. We inject the mobile fix directly when the page is loaded in the
+ * popup iframe (?cp_embed=1) or normally. This fixes the big empty gap on phones.
+ */
+add_action('wp_head', function () {
+    if (!is_page('website-animation')) {
+        return;
+    }
+    ?>
+<style id="cp-calendar-mobile-fix">
+@media(max-width:680px){
+  /* 7-column weekday strip doesn't align with the 2-column mobile card grid and
+     just creates a confusing gap under the header — hide it on phones. */
+  .weekdays{display:none !important;}
+  /* Leading blank offset cells each reserve a full square (~2 empty rows),
+     producing a large void before day 1 on the 2-col grid — collapse them. */
+  .calendar-grid .blank{display:none !important;}
+  /* Tighten header spacing so cards start right after the GIFTS banner. */
+  .headerrow{margin:6px 0 12px !important;}
+  .calendar-grid{margin-top:4px !important;}
+}
+</style>
+    <?php
+}, 99);
+
 add_action('wp_footer', function () {
     // Only on the front page where the popup runs.
     if (!is_front_page() && !is_home()) {
@@ -92,6 +119,27 @@ html body.frontpage #cp-box{
 @media (max-width:400px){
     #cp-close{ width:44px !important; height:44px !important; font-size:26px !important; line-height:44px !important; }
 }
+
+/* --- Fix the stray "X": the WPFront notification-bar close button renders as a
+   bare serif letter in the top-right and collides with the popup. Restyle it into
+   a subtle, properly-shaped close control (and keep it out of the popup's way). --- */
+.wpfront-notification-bar .wpfront-close,
+.wpfront-notification-bar a.wpfront-close{
+    font-size:0 !important;            /* hide the stray "X" glyph */
+    width:22px !important; height:22px !important;
+    line-height:22px !important; text-align:center !important;
+    border-radius:50% !important;
+    background:rgba(0,0,0,.28) !important;
+    opacity:.85 !important;
+}
+.wpfront-notification-bar .wpfront-close::before{
+    content:"\00d7" !important;         /* clean multiplication-sign × */
+    font-size:16px !important; font-family:Arial,Helvetica,sans-serif !important;
+    color:#fff !important; line-height:22px !important;
+}
+/* While the popup is open, don't let the notice-bar X sit on top of the popup. */
+html body.home #cp-ov.is-open ~ * .wpfront-notification-bar,
+.cp-lock .wpfront-notification-bar{ z-index:1 !important; }
 </style>
 <script id="cp-popup-responsive-fix-js">
 (function(){

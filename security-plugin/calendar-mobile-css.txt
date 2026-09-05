@@ -1,0 +1,12 @@
+/* === Sanctify fix: mobile spacing + header alignment (appended) === */
+@media(max-width:680px){
+  /* The weekday S M T W T F S row is a 7-column strip that no longer aligns
+     with the 2-column card grid on phones and just adds a confusing gap. Hide it. */
+  .weekdays{display:none !important;}
+  /* Leading blank offset cells reserve a full square each (~2 empty rows),
+     creating a large void before day 1 on the 2-col mobile grid. Collapse them. */
+  .calendar-grid .blank{display:none !important;}
+  /* Tighten the header block spacing so cards start right after GIFTS. */
+  .headerrow{margin:6px 0 12px !important;}
+  .calendar-grid{margin-top:4px !important;}
+}
