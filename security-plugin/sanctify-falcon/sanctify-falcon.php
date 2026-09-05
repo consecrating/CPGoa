@@ -3,7 +3,7 @@
  * Plugin Name: Sanctify Falcon
  * Plugin URI:  https://www.sanctify.in
  * Description: Active malware defense for WordPress. Detects and auto-removes self-healing infections (auto_prepend loaders, fake "backup" mu-plugins, rogue-hex cron hooks, backdoor admins, and known dropper seeds), hardens PHP execution in wp-content/uploads, and logs every action. Built in response to the "Smooth Backup Ink" (SCV) infection family.
- * Version:     1.0.0
+ * Version:     1.1.0
  * Author:      Sanctify (Antigravity AI)
  * License:     GPL2
  * Text Domain: sanctify-falcon
@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('SANCTIFY_FALCON_VERSION', '1.0.0');
+define('SANCTIFY_FALCON_VERSION', '1.1.0');
 define('SANCTIFY_FALCON_FILE', __FILE__);
 define('SANCTIFY_FALCON_DIR', plugin_dir_path(__FILE__));
 define('SANCTIFY_FALCON_URL', plugin_dir_url(__FILE__));
@@ -23,6 +23,7 @@ require_once SANCTIFY_FALCON_DIR . 'includes/class-falcon-logger.php';
 require_once SANCTIFY_FALCON_DIR . 'includes/class-falcon-defense.php';
 require_once SANCTIFY_FALCON_DIR . 'includes/class-falcon-scanner.php';
 require_once SANCTIFY_FALCON_DIR . 'includes/class-falcon-admin.php';
+require_once SANCTIFY_FALCON_DIR . 'includes/class-falcon-waf.php';
 
 /**
  * Boot the plugin.
@@ -33,6 +34,10 @@ function sanctify_falcon_boot() {
     add_action('init', array($defense, 'run_guards'), 1);
     // Also run on cron so a scheduled infection attempt is cleaned even without a page view.
     add_action('sanctify_falcon_hourly', array($defense, 'run_guards'));
+
+    // Virtual patch / WAF for unpatched theme-bundled plugins (ThemeREX, RevSlider).
+    $waf = new Sanctify_Falcon_WAF();
+    $waf->hooks();
 
     // Admin UI.
     if (is_admin()) {
