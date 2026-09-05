@@ -26,6 +26,37 @@ add_action('wp_head', function () {
     }
     ?>
 <style id="cp-calendar-mobile-fix">
+/* --- Header row: fix the distorted / overlapping "SURPRISE GIFTS" ---
+   The original uses a rigid 7-col grid where .surprise (47px) and .gifts (57px)
+   with white-space:nowrap overflow their single-column cells and collide.
+   Switch the header to a flex row so DAILY | SURPRISE GIFTS space out cleanly and
+   the text scales to available width instead of overlapping. */
+.headerrow{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:24px !important;
+    flex-wrap:nowrap !important;
+}
+.headerrow .daily{
+    grid-column:auto !important;
+    flex:0 1 auto !important;
+    white-space:nowrap !important;
+    font-size:clamp(16px,2.2vw,28px) !important;
+    letter-spacing:10px !important;
+    padding:8px 18px !important;
+}
+.headerrow .surprise,
+.headerrow .gifts{
+    grid-column:auto !important;
+    flex:0 0 auto !important;
+    white-space:nowrap !important;
+    text-align:center !important;
+    overflow:visible !important;
+}
+.headerrow .surprise{ font-size:clamp(20px,2.6vw,40px) !important; }
+.headerrow .gifts{ font-size:clamp(24px,3.2vw,50px) !important; margin-left:-8px !important; }
+
 @media(max-width:680px){
   /* 7-column weekday strip doesn't align with the 2-column mobile card grid and
      just creates a confusing gap under the header — hide it on phones. */
@@ -34,8 +65,10 @@ add_action('wp_head', function () {
      producing a large void before day 1 on the 2-col grid — collapse them. */
   .calendar-grid .blank{display:none !important;}
   /* Tighten header spacing so cards start right after the GIFTS banner. */
-  .headerrow{margin:6px 0 12px !important;}
-  .calendar-grid{margin-top:4px !important;}
+  .headerrow{margin:6px 0 12px !important; gap:10px !important; flex-wrap:wrap !important;}
+  .headerrow .daily{ flex:1 0 100% !important; }
+  .headerrow .surprise{ font-size:22px !important; }
+  .headerrow .gifts{ font-size:26px !important; margin-left:0 !important; }
 }
 </style>
     <?php
@@ -71,18 +104,18 @@ html body.frontpage #cp-ov.is-open{
 
 /* --- Responsive box sizing --- */
 #cp-box{
-    width:90vw;
+    width:92vw;
     height:90vh;
     height:90dvh;                     /* dvh avoids mobile address-bar clipping */
-    max-width:1100px;                 /* don't over-stretch on large desktops */
+    max-width:1500px;                 /* wide layout on desktop for the 7-col calendar */
     border-radius:10px;
     box-shadow:0 10px 40px rgba(0,0,0,.45);
 }
 html body.home #cp-box,
 html body.frontpage #cp-box{
-    width:90vw !important;
+    width:92vw !important;
     height:90dvh !important;
-    max-width:1100px !important;
+    max-width:1500px !important;
 }
 #cp-frame{ border-radius:10px; }
 
@@ -91,6 +124,7 @@ html body.frontpage #cp-box{
     html body.home #cp-box, html body.frontpage #cp-box{
         width:94vw !important;
         height:90dvh !important;
+        max-width:none !important;
     }
 }
 
